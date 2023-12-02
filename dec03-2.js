@@ -1,0 +1,1 @@
+const input = JSON.parse(require('./dec03_input').vals);
