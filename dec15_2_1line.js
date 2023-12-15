@@ -1,0 +1,3 @@
+const input = JSON.parse(require('./dec15_input').vals)[0];
+
+console.log(input.split(',').map(l => l.split(/[=-]/)).map(l => [l[0], parseInt(l[1]),l[0].split('').reduce((s, c) => ((s + c.charCodeAt()) * 17) % 256, 0)]).reduce((b, l) => [...b.slice(0, l[2]), isNaN(l[1]) ? (e = b[l[2]].findIndex(x => x[0] === l[0])) >= 0 ? [...b[l[2]].slice(0, e), ...b[l[2]].slice(e + 1, b[l[2]].length)] : b[l[2]] : (e = b[l[2]].findIndex(x => x[0] === l[0])) >= 0 ? [...b[l[2]].slice(0, e), [b[l[2]][e][0], l[1]], ...b[l[2]].slice(e + 1, b[l[2]].length)] : [...b[l[2]], [l[0], l[1]]], ...b.slice(l[2] + 1, b.length)], [...Array(256)].map(x => [])).reduce((i, b) => [i[0] + b.reduce((j, l) => [j[0] + (i[1]) * (j[1]) * l[1], ++j[1]], [0, 1])[0], ++i[1]], [0, 1])[0]);
